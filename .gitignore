@@ -1,0 +1,71 @@
+# ===============================
+# Build folders
+# ===============================
+target/
+build/
+ 
+# ===============================
+# Logs
+# ===============================
+*.log
+logs/
+ 
+# ===============================
+# OS files
+# ===============================
+.DS_Store
+Thumbs.db
+ 
+# ===============================
+# IDE files
+# ===============================
+ 
+# IntelliJ
+.idea/
+*.iml
+ 
+# VS Code
+.vscode/
+ 
+# Eclipse
+.project
+.classpath
+.settings/
+ 
+# ===============================
+# Java compiled files
+# ===============================
+*.class
+ 
+# ===============================
+# Environment files
+# ===============================
+.env
+.env.*
+ 
+# ===============================
+# Application secrets (IMPORTANT)
+# ===============================
+application.properties
+application.yml
+ 
+# (Optional safer approach instead)
+# application-*.properties
+# application-*.yml
+ 
+# ===============================
+# Dependency directories
+# ===============================
+node_modules/
+ 
+# ===============================
+# Temporary files
+# ===============================
+*.tmp
+*.swp
+*~
+ 
+# ===============================
+# Coverage / reports
+# ===============================
+coverage/
