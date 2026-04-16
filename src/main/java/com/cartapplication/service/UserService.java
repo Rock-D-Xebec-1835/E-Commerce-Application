@@ -1,9 +1,12 @@
 package com.cartapplication.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.cartapplication.dto.UserRequestDTO;
+import com.cartapplication.dto.UserResponseDTO;
 import com.cartapplication.entity.User;
 import com.cartapplication.repository.UserRepository;
 import com.cartapplication.exception.ResourceNotFoundException;
@@ -12,33 +15,55 @@ import com.cartapplication.exception.ResourceNotFoundException;
 public class UserService {
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService (UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserResponseDTO createUser(UserRequestDTO dto) {
+    	User user=new User();
+    	user.setFirstName(dto.getFirstName());
+    	user.setLastName(dto.getLastName());
+    	user.setEmail(dto.getEmail());
+    	user.setPhone(dto.getPhone());
+    	user.setRole(dto.getRole());
+        User saved = userRepository.save(user);
+        return toResponseDTO(saved);
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponseDTO> getAllUsers() {
+        return userRepository.findAll().stream().map(this::toResponseDTO).collect(Collectors.toList() );
     }
 
-    public User getUserById(Long id) {
-        return userRepository.findById(id)
+    public UserResponseDTO getUserById(Long id) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        return toResponseDTO(user);
     }
 
-    public User updateUser(Long id, User userDetails) {
+    public UserResponseDTO updateUser(Long id, UserRequestDTO dto) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
 
-        user.setFirstName(userDetails.getFirstName());
-        user.setLastName(userDetails.getLastName());
-        user.setEmail(userDetails.getEmail());
-        user.setPhone(userDetails.getPhone());
-        user.setRole(userDetails.getRole());
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setEmail(dto.getEmail());
+        user.setPhone(dto.getPhone());
+        user.setRole(dto.getRole());
 
-        return userRepository.save(user);
+        User updated = userRepository.save(user);
+        return toResponseDTO(updated);
+    }
+    
+    private UserResponseDTO toResponseDTO(User user) {
+        UserResponseDTO dto = new UserResponseDTO();
+        dto.setId(user.getUserId());
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setEmail(user.getEmail());
+        dto.setPhone(user.getPhone());
+        dto.setRole(user.getRole());
+        return dto;
     }
 }
+
+

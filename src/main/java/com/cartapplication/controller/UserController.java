@@ -4,41 +4,42 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.cartapplication.dto.UserRequestDTO;
+import com.cartapplication.dto.UserResponseDTO;
 import com.cartapplication.entity.User;
 import com.cartapplication.service.UserService;
-import com.cartapplication.validator.UserValidation;
+//import com.cartapplication.validator.UserValidation;
+
+import jakarta.validation.Valid;
 
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 	private final UserService userService;
-	private UserValidation validator;
 	
-	public UserController(UserService userService, UserValidation validator) {
+	public UserController(UserService userService) {
 		this.userService=userService;
-		this.validator=validator;
 	}
 	
 	@PostMapping
-	public User createUser(@RequestBody User user) {
-		validator.validate(user);
-		return userService.createUser(user);
+	public UserResponseDTO createUser( @Valid @RequestBody UserRequestDTO dto) {
+		return userService.createUser(dto);
 	}
 	
 	@GetMapping("/{id}")
-	public User getUserById(@PathVariable Long id) {
+	public UserResponseDTO getUserById(@PathVariable Long id) {
 		return userService.getUserById(id);
 	}
 	
 	@GetMapping
-    public List<User> getAllUsers() {
+    public List<UserResponseDTO> getAllUsers() {
         return userService.getAllUsers();
 	}
     
 	
 	@PutMapping("/{id}")
-	public User updateUser(@PathVariable Long id, @RequestBody User user) {
-		return userService.updateUser(id, user);
+	public UserResponseDTO updateUser(@PathVariable Long id, @Valid @RequestBody UserRequestDTO dto) {
+		return userService.updateUser(id, dto);
 	}
 }
