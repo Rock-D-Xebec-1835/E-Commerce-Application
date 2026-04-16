@@ -15,8 +15,18 @@ public class Inventory {
 
     private Integer availableQuantity;
     private Integer reorderLevel;
+    
+    public Inventory() {
+    	
+    }
 
-    // getters and setters
+    public Inventory(Product product, Integer availableQuantity, Integer reorderLevel) {
+		this.product = product;
+		this.availableQuantity = availableQuantity;
+		this.reorderLevel = reorderLevel;
+	}
+    
+	// getters and setters
     public Long getInventoryId() { return inventoryId; }
     public void setInventoryId(Long inventoryId) { this.inventoryId = inventoryId; }
 
