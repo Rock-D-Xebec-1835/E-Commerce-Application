@@ -18,6 +18,8 @@ public class InventoryService {
 
     @Autowired
     private InventoryRepository inventoryRepository;
+    @Autowired
+    private NotificationService notificationService;
 
     // 1. Add stock
     public InventoryResponseDTO addStock(InventoryRequestDTO req) {
@@ -82,7 +84,6 @@ public class InventoryService {
     }
     
     
-    
     public void validateStock(Long productId, Integer quantity) {
     	Inventory inventory = inventoryRepository.findByProduct_ProductId(productId).orElseThrow(() -> new ResourceNotFoundException("No inventory found for this product"));
     	if(inventory.getAvailableQuantity() < quantity) throw new RuntimeException("Insufficient stock for Product Id: " + productId);
@@ -95,7 +96,7 @@ public class InventoryService {
     	inventory.setAvailableQuantity(remaining);
     	inventoryRepository.save(inventory);
     	if(remaining <= inventory.getReorderLevel()) {
-    		//notification alert
+    		notificationService.sendLowStockAlert(productId, remaining);
     	}
     }
 }

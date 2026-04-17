@@ -1,9 +1,16 @@
 package com.cartapplication.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
 public class ProductRequestDTO {
+	@NotBlank(message = "Product name cannot be null")
 	private String productName;
+	@NotBlank(message = "Description cannot be null")
 	private String description;
+	@NotBlank(message = "Category cannot be null")
 	private String category;
+	@Positive(message = "Price must be positive")
 	private Double price;
 	public String getProductName() {
 		return productName;

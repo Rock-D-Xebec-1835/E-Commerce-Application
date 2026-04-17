@@ -1,8 +1,13 @@
 package com.cartapplication.dto;
 
+import jakarta.validation.constraints.Positive;
+
 public class InventoryRequestDTO {
+	@Positive(message = "Product ID must be positive")
     private Long productId;
+	@Positive(message = "Available quantity must be positive")
     private Integer availableQuantity;
+	@Positive(message = "Re-order level must be positive")
     private Integer reorderLevel;
 
     // getters and setters

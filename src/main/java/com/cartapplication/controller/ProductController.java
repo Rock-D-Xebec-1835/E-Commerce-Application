@@ -17,7 +17,7 @@ import com.cartapplication.dto.ProductResponseDTO;
 import com.cartapplication.service.ProductService;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 public class ProductController {
 	@Autowired
 private ProductService productService;

@@ -10,7 +10,7 @@ public class Inventory {
     private Long inventoryId;
 
     @OneToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", unique = true, nullable = false)
     private Product product;
 
     private Integer availableQuantity;

@@ -32,6 +32,8 @@ public class OrderService {
 	private UserService userService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private NotificationService notificationService;
 	
 	// ORDER CHECKOUT
 	
@@ -71,8 +73,7 @@ public class OrderService {
 			inventoryService.reduceStock(orderItem.getProduct().getProductId(), orderItem.getQuantity());			
 		}
 		
-		// Notification for successful order
-		
+		notificationService.sendOrderConfirmation(order.getOrderId());
 		return toResponseDTO(savedOrder);
 	}
 	

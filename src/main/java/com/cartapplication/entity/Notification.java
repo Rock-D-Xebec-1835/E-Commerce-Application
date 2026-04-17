@@ -1,31 +1,32 @@
 package com.cartapplication.entity;
 
+import com.cartapplication.enums.NotificationStatus;
+import com.cartapplication.enums.NotificationType;
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "notifications")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Notification {
-
-    private String message;
-    private String type;
-    
-    // getters and setters
-    
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long notificationId;
+	
+	@Enumerated(EnumType.STRING)
+	private NotificationType type;
+	
+	private String recipientEmail;
+	@Column(length = 1000)
+	private String message;
+	
+	@Enumerated(EnumType.STRING)
+	private NotificationStatus status;
+	
 }

@@ -1,5 +1,9 @@
 package com.cartapplication.entity;
 
+import org.springframework.web.servlet.handler.UserRoleAuthorizationInterceptor;
+
+import com.cartapplication.enums.UserRole;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -19,14 +23,15 @@ public class User {
 	
 	private String phone;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)
-	private String role;
+	private UserRole role;
 	
 	public User() {
 		
 	}
 
-	public User(Long userId, String firstName, String lastName, String email, String phone, String role) {
+	public User(Long userId, String firstName, String lastName, String email, String phone, UserRole role) {
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -75,11 +80,11 @@ public class User {
 		this.phone = phone;
 	}
 
-	public String getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 		

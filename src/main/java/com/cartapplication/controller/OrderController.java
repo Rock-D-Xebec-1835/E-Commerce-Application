@@ -40,7 +40,7 @@ public class OrderController {
 	}
 	
 	// GET ORDERS FOR USER
-	@GetMapping("/orders/users/{id}")
+	@GetMapping("/orders/users/{userId}")
 	public List<OrderResponseDTO> getOrdersForUser(@PathVariable Long userId){
 		return orderService.getOrdersByUserId(userId);
 	}

@@ -1,5 +1,7 @@
 package com.cartapplication.dto;
 
+import com.cartapplication.enums.UserRole;
+
 import jakarta.validation.constraints.*;
 
 public class UserRequestDTO {
@@ -17,9 +19,8 @@ public class UserRequestDTO {
 	@NotBlank(message="Phone number cannot be blank")
 	private String phone;
 	
-	@NotBlank(message="Role is required")
-	@Pattern(regexp="^(customer|admin)$",message="Role must be either 'customer' or 'admin'")
-	private String role;
+	@NotNull(message = "Role cannot be null")
+	private UserRole role;
 	
 	public String getFirstName() {
 		return firstName;
@@ -45,10 +46,10 @@ public class UserRequestDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getRole() {
+	public UserRole getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 	

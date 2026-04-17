@@ -1,12 +1,14 @@
 package com.cartapplication.dto;
 
+import com.cartapplication.enums.UserRole;
+
 public class UserResponseDTO {
 	private Long id;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String phone;
-	private String role;
+	private UserRole role;
 	
 	public Long getId() {
 		return id;
@@ -38,10 +40,10 @@ public class UserResponseDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getRole() {
+	public UserRole getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 	
