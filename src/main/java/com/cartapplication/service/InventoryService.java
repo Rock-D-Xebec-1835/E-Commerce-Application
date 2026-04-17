@@ -10,6 +10,7 @@ import com.cartapplication.dto.InventoryRequestDTO;
 import com.cartapplication.dto.InventoryResponseDTO;
 import com.cartapplication.entity.Inventory;
 import com.cartapplication.entity.Product;
+import com.cartapplication.exception.ResourceNotFoundException;
 import com.cartapplication.repository.InventoryRepository;
 
 @Service
@@ -40,7 +41,7 @@ public class InventoryService {
         Product product = new Product();
         product.setProductId(productId);
 
-        Inventory inv = inventoryRepository.findByProduct(product)
+        Inventory inv = inventoryRepository.findByProduct_ProductId(productId)
                 .orElseThrow(() -> new RuntimeException("No inventory found for productId: " + productId));
         return mapToDTO(inv);
     }
@@ -50,7 +51,7 @@ public class InventoryService {
         Product product = new Product();
         product.setProductId(productId);
 
-        Inventory inv = inventoryRepository.findByProduct(product)
+        Inventory inv = inventoryRepository.findByProduct_ProductId(productId)
                 .orElseThrow(() -> new RuntimeException("No inventory found for productId: " + productId));
 
         // Update fields from DTO
@@ -78,5 +79,23 @@ public class InventoryService {
         dto.setAvailableQuantity(inv.getAvailableQuantity());
         dto.setReorderLevel(inv.getReorderLevel());
         return dto;
+    }
+    
+    
+    
+    public void validateStock(Long productId, Integer quantity) {
+    	Inventory inventory = inventoryRepository.findByProduct_ProductId(productId).orElseThrow(() -> new ResourceNotFoundException("No inventory found for this product"));
+    	if(inventory.getAvailableQuantity() < quantity) throw new RuntimeException("Insufficient stock for Product Id: " + productId);
+    }
+    
+    public void reduceStock(Long productId, Integer quantity) {
+    	Inventory inventory = inventoryRepository.findByProduct_ProductId(productId).orElseThrow(() -> new ResourceNotFoundException("No inventory found for this product"));
+    	int remaining = inventory.getAvailableQuantity() - quantity;
+    	if(remaining < 0) throw new RuntimeException("Stock cannot go below zero for product Id: " + productId);
+    	inventory.setAvailableQuantity(remaining);
+    	inventoryRepository.save(inventory);
+    	if(remaining <= inventory.getReorderLevel()) {
+    		//notification alert
+    	}
     }
 }

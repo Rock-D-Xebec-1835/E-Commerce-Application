@@ -11,4 +11,6 @@ import com.cartapplication.entity.Product;
 @Repository
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
     Optional<Inventory> findByProduct(Product product);
+    
+    Optional<Inventory> findByProduct_ProductId(Long productId);
 }

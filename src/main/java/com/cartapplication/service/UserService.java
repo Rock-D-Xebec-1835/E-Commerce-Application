@@ -64,6 +64,10 @@ public class UserService {
         dto.setRole(user.getRole());
         return dto;
     }
+    
+    public User getUserEntityById(Long id) {
+    	return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    }
 }
 
 
