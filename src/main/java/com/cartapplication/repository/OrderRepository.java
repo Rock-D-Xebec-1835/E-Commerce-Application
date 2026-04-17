@@ -10,6 +10,6 @@ import com.cartapplication.entity.Order;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long>{
 	
-	List<Order> findByUserId(Long userId);
+	List<Order> findByUser_UserId(Long userId);
 
 }

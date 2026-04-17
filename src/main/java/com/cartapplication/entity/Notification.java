@@ -3,11 +3,7 @@ package com.cartapplication.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "notification")
 public class Notification {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private String message;
     private String type;

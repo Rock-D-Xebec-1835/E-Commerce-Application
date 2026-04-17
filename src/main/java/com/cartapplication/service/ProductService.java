@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cartapplication.dto.ProductRequestDTO;
 import com.cartapplication.dto.ProductResponseDTO;
 import com.cartapplication.entity.Product;
+import com.cartapplication.exception.ResourceNotFoundException;
 import com.cartapplication.repository.ProductRepository;
 
 @Service
@@ -72,5 +73,9 @@ public ProductResponseDTO mapToDTO(Product product) {
 	dto.setProductId(product.getProductId());
 	dto.setProductName(product.getProductName());
 	return dto;
+}
+
+public Product getProductEntityById(Long id) {
+	 return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product Not Found"));
 }
 }
