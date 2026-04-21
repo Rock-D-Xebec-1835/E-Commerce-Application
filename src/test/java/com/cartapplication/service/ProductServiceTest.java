@@ -34,7 +34,7 @@ public class ProductServiceTest {
 		ProductRequestDTO request = new ProductRequestDTO();
 		
 		request.setProductName("Strepsils");
-		request.setDescription("Something Harsheen really needs right now!");
+		request.setDescription("Helps you deal with throat irritation");
 		request.setCategory("Medicine");
 		request.setPrice(10.0);
 		
@@ -47,7 +47,7 @@ public class ProductServiceTest {
 	void testGetProductById() {
 		Product product = new Product();
 		product.setProductName("Strepsils");
-		product.setDescription("Something Harsheen really needs right now!");
+		product.setDescription("Helps you deal with throat irritation");
 		product.setCategory("Medicine");
 		product.setPrice(10.0);
 		
@@ -63,7 +63,7 @@ public class ProductServiceTest {
 	void testProductNotFound() {
 		Product product = new Product();
 		product.setProductName("Strepsils");
-		product.setDescription("Something Harsheen really needs right now!");
+		product.setDescription("Helps you deal with throat irritation");
 		product.setCategory("Medicine");
 		product.setPrice(10.0);
 		
