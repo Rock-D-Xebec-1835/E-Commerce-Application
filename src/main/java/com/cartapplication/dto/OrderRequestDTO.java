@@ -9,9 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class OrderRequestDTO {
 	
 	@NotNull(message = "User ID cannot be null")
@@ -21,4 +19,21 @@ public class OrderRequestDTO {
 	@NotEmpty(message = "Order list must contain atleast one item")
 	private List<OrderItemRequestDTO> orderItems;
 
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public List<OrderItemRequestDTO> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItemRequestDTO> orderItems) {
+		this.orderItems = orderItems;
+	}
+
+	
 }

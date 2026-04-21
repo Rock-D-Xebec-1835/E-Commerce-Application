@@ -16,9 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "order_items")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class OrderItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +34,57 @@ public class OrderItem {
 	
 	private Integer quantity;
 	private Double unitPrice;
+	
+	public OrderItem() {}
+
+	public OrderItem(Order order, Product product, Integer quantity, Double unitPrice) {
+		this.order = order;
+		this.product = product;
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+	}
+
+	public Long getOrderItemId() {
+		return orderItemId;
+	}
+
+	public void setOrderItemId(Long orderItemId) {
+		this.orderItemId = orderItemId;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public Double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(Double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+	
+	
+	
+	
 }
