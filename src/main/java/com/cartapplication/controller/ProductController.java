@@ -16,13 +16,15 @@ import com.cartapplication.dto.ProductRequestDTO;
 import com.cartapplication.dto.ProductResponseDTO;
 import com.cartapplication.service.ProductService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
 	@Autowired
 private ProductService productService;
 	@PostMapping()
-	public ProductResponseDTO addProduct(@RequestBody ProductRequestDTO req) {
+	public ProductResponseDTO addProduct(@Valid @RequestBody ProductRequestDTO req) {
 		return productService.addProduct(req);
 	}
     @GetMapping()
